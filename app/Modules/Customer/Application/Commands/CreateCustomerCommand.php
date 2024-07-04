@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Clients\Application\Commands;
+namespace App\Modules\Customer\Application\Commands;
 
-class RegisterClientCommand
+class CreateCustomerCommand
 {
     public $name;
     public $email;

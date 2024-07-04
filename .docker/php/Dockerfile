@@ -62,6 +62,6 @@ RUN git clone https://github.com/seebi/dircolors-solarized
 EXPOSE 5173
 
 # Cambiar al usuario workspace
-USER workspace
+USER root
 
 WORKDIR /var/www

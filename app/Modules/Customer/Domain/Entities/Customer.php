@@ -4,15 +4,15 @@ namespace App\Modules\Customer\Domain\Entities;
 
 class Customer
 {
-    private $id;
-    private $name;
+    public $id;
+    public $name;
 
-    private $phone;
+    public $phone;
 
-    private $address;
+    public $address;
 
 
-    public function __construct($id, $name, $phone, $address)
+    public function __construct($id = null, $name, $phone, $address=null)
     {
         $this->id = $id;
         $this->name = $name;
