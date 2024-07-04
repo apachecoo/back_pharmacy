@@ -1,0 +1,38 @@
+type Customer {
+    id: ID!
+    name: String
+    phone: Int
+    address: String    
+}
+
+input CreateCustomerInput {
+    name: String!
+    phone: Int
+    address: String    
+}
+
+input UpdateCustomerInput {
+    name: String!
+    phone: Int
+    address: String    
+}
+
+type DeleteCustomerResponse {
+  message: String!
+}
+
+extend type Query {
+    Customer(id:ID! @eq): Customer! @find
+    customers(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        name: String @where(operator: "like")
+        "Filters by document"
+        document: Int @where(operator: "=")
+    ): [Customer!]! @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createCustomer(input: CreateCustomerInput! @spread): Customer!  @field(resolver: "App\\GraphQL\\Mutations\\CreateCustomer")
+    updateCustomer(id: ID! input: UpdateCustomerInput! ): Customer! @field(resolver: "App\\GraphQL\\Mutations\\UpdateCustomer")
+    deleteCustomer(id: ID!): DeleteCustomerResponse! @field(resolver: "App\\GraphQL\\Mutations\\DeleteCustomer")
+}
