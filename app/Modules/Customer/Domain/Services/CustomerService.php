@@ -20,4 +20,11 @@ class CustomerService
         $this->CustomerRepository->save($Customer);
         return $Customer;
     }
+
+    public function updateCustomer($name, $phone, $address)
+    {
+        $Customer = new Customer(null, $name, $phone, $address);
+        $this->CustomerRepository->update($Customer);
+        return $Customer;        
+    }
 }

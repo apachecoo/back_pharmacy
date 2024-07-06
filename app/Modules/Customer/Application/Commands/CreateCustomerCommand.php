@@ -5,11 +5,12 @@ namespace App\Modules\Customer\Application\Commands;
 class CreateCustomerCommand
 {
     public $name;
-    public $email;
+    public $phone;
+    public $address;
 
-    public function __construct($name, $email)
+    public function __construct($name, $phone)
     {
         $this->name = $name;
-        $this->email = $email;
+        $this->phone = $phone;
     }
 }

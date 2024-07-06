@@ -12,7 +12,7 @@ class Customer
     public $address;
 
 
-    public function __construct($id = null, $name, $phone, $address=null)
+    public function __construct($id = null, $name, $phone, $address)
     {
         $this->id = $id;
         $this->name = $name;

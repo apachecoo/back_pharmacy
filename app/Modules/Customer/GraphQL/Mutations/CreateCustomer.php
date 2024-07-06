@@ -11,7 +11,6 @@ final readonly class CreateCustomer
         $this->createCustomerHandler = $createCustomerHandler;
     }
 
-    /** @param  array{}  $args */
     public function __invoke(null $_, array $args)
     {
         $command = new CreateCustomerCommand($args['name'], $args['phone']);
