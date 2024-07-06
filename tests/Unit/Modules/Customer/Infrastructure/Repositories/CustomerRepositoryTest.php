@@ -27,6 +27,4 @@ class CustomerRepositoryTest extends TestCase
         $this->assertEquals('John Doe', $customerEntity->name);
         $this->assertEquals('3229029662', $customerEntity->phone);
     }
-
-    
 }
