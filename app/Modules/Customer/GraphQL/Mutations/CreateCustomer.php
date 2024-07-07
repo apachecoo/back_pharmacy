@@ -13,7 +13,7 @@ final readonly class CreateCustomer
 
     public function __invoke(null $_, array $args)
     {
-        $command = new CreateCustomerCommand($args['name'], $args['phone']);
+        $command = new CreateCustomerCommand($args['name'], $args['phone'],$args['address']);
         return $this->createCustomerHandler->handle($command);
     }
 }

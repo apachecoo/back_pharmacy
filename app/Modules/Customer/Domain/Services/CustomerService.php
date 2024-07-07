@@ -14,17 +14,22 @@ class CustomerService
         $this->CustomerRepository = $CustomerRepository;
     }
 
-    public function registerCustomer($name, $phone)
+    public function registerCustomer(string $name, string $phone, string $address): Customer
     {
-        $Customer = new Customer(null, $name, $phone);
+        $Customer = new Customer(null, $name, $phone, $address);
         $this->CustomerRepository->save($Customer);
         return $Customer;
     }
 
-    public function updateCustomer($name, $phone, $address)
+    public function updateCustomer(int $id, string $name, string $phone, string $address): Customer
     {
-        $Customer = new Customer(null, $name, $phone, $address);
-        $this->CustomerRepository->update($Customer);
+        $Customer = new Customer($id, $name, $phone, $address);
+        $this->CustomerRepository->update($Customer->id, $Customer);
         return $Customer;        
+    }
+
+    public function deleteCustomer(int $id): Customer
+    {
+        return $this->CustomerRepository->delete($id);
     }
 }

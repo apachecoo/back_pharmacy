@@ -5,7 +5,7 @@ use App\Modules\Customer\Domain\Entities\Customer;
 use App\Modules\Customer\Domain\Services\CustomerService;
 use App\Modules\Customer\Application\Commands\DeleteCustomerCommand;
 
-class UpdateCustomerHandler 
+class DeleteCustomerHandler 
 {
     public CustomerService $customerService;
 
@@ -14,13 +14,10 @@ class UpdateCustomerHandler
         $this->customerService = $customerService;
     }
 
-    public function handle(DeleteCustomerCommand $updateCustomerCommand): Customer
+    public function handle(DeleteCustomerCommand $deleteCustomerCommand): Customer
     {
-        return $this->customerService->updateCustomer(
-            $updateCustomerCommand->id,
-            $updateCustomerCommand->name,
-            $updateCustomerCommand->phone,
-            $updateCustomerCommand->address,
+        return $this->customerService->deleteCustomer(
+            $deleteCustomerCommand->id
         );   
     }
 }

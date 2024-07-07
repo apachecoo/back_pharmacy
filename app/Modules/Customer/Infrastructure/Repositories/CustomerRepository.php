@@ -6,20 +6,16 @@ use App\Modules\Customer\Domain\Repositories\CustomerRepositoryInterface;
 use App\Models\Customer as CustomerModel;
 use App\Modules\Customer\Domain\Entities\Customer;
 
+
 class CustomerRepository implements CustomerRepositoryInterface
 {
-    public function find($id)
+    public function find(int $id): Customer
     {
         $customerModel = CustomerModel::find($id);
-        return new Customer(
-            $customerModel->id, 
-            $customerModel->name, 
-            $customerModel->phone, 
-            $customerModel->address
-        );
+        return $this->getCustomer($customerModel);
     }
 
-    public function save($customer)
+    public function save(Customer $customer): Customer
     {
         $customerModel = new CustomerModel();
         $customerModel->name = $customer->name;
@@ -27,23 +23,39 @@ class CustomerRepository implements CustomerRepositoryInterface
         $customerModel->address = $customer->address;
         $customerModel->save();
         $customer->id = $customerModel->id;
+        return $this->getCustomer($customerModel);
     }
 
-    public function update($customer)
-    {
-        $customerModel = new CustomerModel();
-        $customerModel->name = $customer->name; 
-        $customerModel->phone = $customer->phone;
-        $customerModel->address = $customer->address;
-        $customerModel->save();
-    }
-
-    public function delete($id): void
+    public function update(int $id, Customer $customer): Customer
     {
         $customerModel = CustomerModel::find($id);
         if(!$customerModel){
-            throw new \Exception('Customer not found');            
-        }        
+            throw new \Exception('Customer not found');
+        }
+        $customerModel->name = $customer->name;
+        $customerModel->phone = $customer->phone;
+        $customerModel->address = $customer->address;
+        $customerModel->save();
+        return $this->getCustomer($customerModel);
+    }
+
+    public function delete(int $id): ?Customer
+    {
+        $customerModel = CustomerModel::find($id);
+        if (!$customerModel) {
+            throw new \Exception('Customer not found');
+        }
         $customerModel->delete();
+        return $this->getCustomer($customerModel);
+    }
+
+    public function getCustomer(CustomerModel $customerModel): Customer
+    {
+        return new Customer(
+            $customerModel->id,
+            $customerModel->name,
+            $customerModel->phone,
+            $customerModel->address
+        );
     }
 }

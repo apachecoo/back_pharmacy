@@ -7,18 +7,14 @@ type Customer {
 
 input CreateCustomerInput {
     name: String!
-    phone: String
+    phone: String!
     address: String    
 }
 
 input UpdateCustomerInput {
     name: String!
-    phone: Int
+    phone: String!
     address: String    
-}
-
-type DeleteCustomerResponse {
-  message: String!
 }
 
 extend type Query {
@@ -33,6 +29,6 @@ extend type Query {
 
 extend type Mutation {
     createCustomer(input: CreateCustomerInput! @spread): Customer!  @field(resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\CreateCustomer")
-    # updateCustomer(id: ID! input: UpdateCustomerInput! ): Customer! @field(resolver: "App\\GraphQL\\Mutations\\UpdateCustomer")
-    # deleteCustomer(id: ID!): DeleteCustomerResponse! @field(resolver: "App\\GraphQL\\Mutations\\DeleteCustomer")
+    updateCustomer(id: ID! input: UpdateCustomerInput! ): Customer! @field(resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\UpdateCustomer")
+    deleteCustomer(id: ID!): Customer! @field(resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\DeleteCustomer")
 }

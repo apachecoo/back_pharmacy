@@ -16,6 +16,6 @@ class CreateCustomerHandler
 
     public function handle(CreateCustomerCommand $command)
     {
-        return $this->customerService->registerCustomer($command->name, $command->email);
+        return $this->customerService->registerCustomer($command->name, $command->phone, $command->address);
     }
 }

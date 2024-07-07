@@ -6,9 +6,7 @@ class Customer
 {
     public $id;
     public $name;
-
     public $phone;
-
     public $address;
 
 
@@ -17,21 +15,6 @@ class Customer
         $this->id = $id;
         $this->name = $name;
         $this->phone = $phone;
-        $this->address = $address;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function setPhone(string $phone)
-    {
-        $this->phone = $phone;
-    }
-
-    public function setAddress(string $address)
-    {
         $this->address = $address;
     }
     public function getId()
