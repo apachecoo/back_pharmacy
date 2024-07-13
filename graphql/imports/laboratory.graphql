@@ -3,18 +3,19 @@ type Laboratory {
     name: String
     address: String
     created_at: DateTime
-    updated_at: DateTime    
-}
-
-input LaboratoryInput {
-    name: String
-    address: String
-    created_at: DateTime
     updated_at: DateTime
 }
 
+input LaboratoryInput
+    @validator(
+        class: "App\\Modules\\Laboratory\\GraphQL\\Validators\\LaboratoryInputValidator"
+    ) {
+    name: String
+    address: String
+}
+
 extend type Query {
-    laboratory(id:ID! @eq): Laboratory! @find
+    laboratory(id: ID! @eq): Laboratory! @find
     laboratories(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         name: String @where(operator: "like")
@@ -25,6 +26,11 @@ extend type Query {
 
 extend type Mutation {
     createLaboratory(input: LaboratoryInput! @spread): Laboratory!
-        @field(resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory")
-        @validator(class: "App\\Modules\\Laboratory\\GraphQL\\Validators\\LaboratoryValidator")
+        @field(
+            resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory"
+        )
+    updateLaboratory(input: LaboratoryInput! @spread): Laboratory!
+        @field(
+            resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory"
+        )
 }

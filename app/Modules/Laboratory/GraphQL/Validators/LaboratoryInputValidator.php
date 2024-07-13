@@ -4,7 +4,7 @@ namespace App\Modules\Laboratory\GraphQL\Validators;
 
 use Nuwave\Lighthouse\Validation\Validator;
 
-final class LaboratoryValidator extends Validator
+final class LaboratoryInputValidator extends Validator
 {
     /**
      * Return the validation rules.
