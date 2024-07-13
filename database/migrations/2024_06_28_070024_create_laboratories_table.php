@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('laboratories', function (Blueprint $table) {
             $table->id();
-            $table->string('labName', 100);
+            $table->string('name', 100);
             $table->string('address', 50);
             $table->timestamps();
         });

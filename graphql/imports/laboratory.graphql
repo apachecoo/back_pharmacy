@@ -1,0 +1,30 @@
+type Laboratory {
+    id: ID!
+    name: String
+    address: String
+    created_at: DateTime
+    updated_at: DateTime    
+}
+
+input LaboratoryInput {
+    name: String
+    address: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Query {
+    laboratory(id:ID! @eq): Laboratory! @find
+    laboratories(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        name: String @where(operator: "like")
+        "Filters by document"
+        document: Int @where(operator: "=")
+    ): [Laboratory!]! @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createLaboratory(input: LaboratoryInput! @spread): Laboratory!
+        @field(resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory")
+        @validator(class: "App\\Modules\\Laboratory\\GraphQL\\Validators\\LaboratoryValidator")
+}
