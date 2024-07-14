@@ -12,9 +12,9 @@ class LaboratoryRepository
         return Laboratory::all();
     }
 
-    public function getById(int $id): Laboratory
+    public function getById(int $id): ?Laboratory
     {
-        return Laboratory::findOrFail($id);
+        return Laboratory::find($id);
     }
 
     public function create(array $data): Laboratory

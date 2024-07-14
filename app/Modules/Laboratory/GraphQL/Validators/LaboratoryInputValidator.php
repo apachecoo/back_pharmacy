@@ -21,17 +21,14 @@ final class LaboratoryInputValidator extends Validator
 
     public function messages(): array
     {
-        return [
-            'name.required'=> 'El nombre del laboratorio es requerido.',
-            'address.required'=> 'La dirección del laboratorio es requerido.',
-        ];
+        return [];
     }
 
     public function attributes(): array
     {
         return [
-            'name'=> 'nombre laboratorio',
-            'address'=> 'dirección laboratorio',
+            'name' => __('laboratory.laboratory.name'),
+            'address' => __('laboratory.laboratory.address'),
         ];
     }
 

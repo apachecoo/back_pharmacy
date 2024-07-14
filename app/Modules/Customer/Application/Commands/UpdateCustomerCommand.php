@@ -2,7 +2,7 @@
 
 namespace App\Modules\Customer\Application\Commands;
 
-class DeleteCustomerCommand
+class UpdateCustomerCommand
 {
     public int $id;
     public string $name;

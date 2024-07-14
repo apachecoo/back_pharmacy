@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Modules\Customer\Infrastructure;
+namespace Tests\Unit\Modules\Customer\Infrastructure\Repositories;
 
 use App\Modules\Customer\Infrastructure\Repositories\CustomerRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;

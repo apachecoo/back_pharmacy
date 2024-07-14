@@ -6,6 +6,11 @@ type Laboratory {
     updated_at: DateTime
 }
 
+type ResponseDelete {
+    message: String
+    deleted: Boolean
+}
+
 input LaboratoryInput
     @validator(
         class: "App\\Modules\\Laboratory\\GraphQL\\Validators\\LaboratoryInputValidator"
@@ -32,5 +37,9 @@ extend type Mutation {
     updateLaboratory(input: LaboratoryInput! @spread): Laboratory!
         @field(
             resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory"
+        )
+    deleteLaboratory(id: Int!): ResponseDelete!
+        @field(
+            resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\DeleteLaboratory"
         )
 }
