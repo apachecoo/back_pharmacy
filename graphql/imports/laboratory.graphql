@@ -34,9 +34,9 @@ extend type Mutation {
         @field(
             resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory"
         )
-    updateLaboratory(input: LaboratoryInput! @spread): Laboratory!
+    updateLaboratory(id: Int!, input: LaboratoryInput!): Laboratory!
         @field(
-            resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\CreateLaboratory"
+            resolver: "App\\Modules\\Laboratory\\GraphQL\\Mutations\\UpdateLaboratory"
         )
     deleteLaboratory(id: Int!): ResponseDelete!
         @field(

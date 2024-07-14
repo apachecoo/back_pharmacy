@@ -2,37 +2,12 @@
 namespace App\Modules\Laboratory\Repositories;
 
 use App\Models\Laboratory;
-use Illuminate\Database\Eloquent\Collection;
+use App\Modules\Core\Repositories\BaseRepository;
 
-class LaboratoryRepository
+
+class LaboratoryRepository extends BaseRepository
 {
-
-    public function getAll(): Collection
-    {
-        return Laboratory::all();
-    }
-
-    public function getById(int $id): ?Laboratory
-    {
-        return Laboratory::find($id);
-    }
-
-    public function create(array $data): Laboratory
-    {
-        return Laboratory::create($data);
-    }
-
-    public function update(int $id, array $data): Laboratory
-    {
-        $laboratory = Laboratory::findOrFail($id);
-        $laboratory->update($data);
-        return $laboratory;
-    }
-
-    public function delete(int $id): bool
-    {
-        $laboratory = Laboratory::findOrFail($id);
-        return $laboratory->delete();
-    }
-
+     public function __construct(){
+        parent::__construct(new Laboratory());
+     }
 }
