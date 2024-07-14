@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('laboratories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('address', 50);
+            $table->string('name', 100)->comment('Laboratory name');
+            $table->string('address', 100)->comment('Laboratory address');
             $table->timestamps();
+            $table->comment('Medicine laboratory');
         });
     }
 

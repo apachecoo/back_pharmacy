@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->id();
-            $table->string('type', 50);
+            $table->string('type', 50)->comment('Kind of product');
             $table->timestamps();
+            $table->comment('It is used to categorize pharmacy products in some specific way.');
         });
     }
 

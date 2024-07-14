@@ -1,0 +1,36 @@
+type Type {
+    id: ID!
+    type: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input TypeInput
+    @validator(
+        class: "App\\Modules\\Type\\GraphQL\\Validators\\TypeInputValidator"
+    ) {
+    type: String
+}
+
+extend type Query {
+    Type(id: ID! @eq): Type! @find
+    types(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        type: String @where(operator: "like")
+    ): [Type!]! @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createType(input: TypeInput! @spread): Type!
+        @field(
+            resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\CreateType"
+        )
+    updateType(id: Int!, input: TypeInput!): Type!
+        @field(
+            resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\UpdateType"
+        )
+    deleteType(id: Int!): ResponseDelete!
+        @field(
+            resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\DeleteType"
+        )
+}

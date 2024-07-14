@@ -6,11 +6,6 @@ type Laboratory {
     updated_at: DateTime
 }
 
-type ResponseDelete {
-    message: String
-    deleted: Boolean
-}
-
 input LaboratoryInput
     @validator(
         class: "App\\Modules\\Laboratory\\GraphQL\\Validators\\LaboratoryInputValidator"

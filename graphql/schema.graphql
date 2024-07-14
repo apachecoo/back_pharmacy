@@ -44,4 +44,11 @@ type User {
     updated_at: DateTime!
 }
 
+
+type ResponseDelete {
+    message: String
+    deleted: Boolean
+}
+
+
 #import */*.graphql

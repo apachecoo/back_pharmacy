@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Modules\Laboratory\GraphQL\Validators;
+namespace App\Modules\Type\GraphQL\Validators;
 
 use Nuwave\Lighthouse\Validation\Validator;
 
-final class LaboratoryInputValidator extends Validator
+final class TypeInputValidator extends Validator
 {
     /**
      * Return the validation rules.
@@ -14,8 +14,7 @@ final class LaboratoryInputValidator extends Validator
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
-            'address' => ['required', 'string', 'max:50'],
+            'type' => ['required', 'string', 'max:50'],
         ];
     }
 
@@ -27,8 +26,7 @@ final class LaboratoryInputValidator extends Validator
     public function attributes(): array
     {
         return [
-            'name' => __('laboratory.name'),
-            'address' => __('laboratory.address'),
+            'name' => __('type.name'),
         ];
     }
 

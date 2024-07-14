@@ -7,7 +7,8 @@ use App\Modules\Core\Repositories\BaseRepository;
 
 class LaboratoryRepository extends BaseRepository
 {
-     public function __construct(){
-        parent::__construct(new Laboratory());
-     }
+   public function __construct()
+   {
+      parent::__construct(new Laboratory());
+   }
 }
