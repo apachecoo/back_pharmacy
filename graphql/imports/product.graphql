@@ -1,0 +1,53 @@
+type Product {
+    productCode: String
+    laboratoryId: Int
+    laboratorie: Laboratory @belongsTo
+    presentationId: Int
+    presentation: Presentation @belongsTo
+    typeId: Int
+    type: Type @belongsTo
+    code: String
+    description: String
+    price: String
+    stock: Int
+    expiration: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input ProductInput
+    @validator(
+        class: "App\\Modules\\Product\\GraphQL\\Validators\\InputValidator"
+    ) {
+    laboratoryId: Int
+    presentationId: Int
+    typeId: Int
+    code: String
+    description: String
+    price: String
+    stock: Int
+    expiration: String
+}
+
+extend type Query {
+    Product(id: ID! @eq): Product! @find
+    products(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        description: String @where(operator: "like")
+    ): [Product!]! @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createProduct(input: ProductInput! @spread): Product!
+        @field(
+            resolver: "App\\Modules\\Product\\GraphQL\\Mutations\\Create"
+        )
+    updateProduct(id: Int!, input: ProductInput!): Product!
+        @field(
+            resolver: "App\\Modules\\Product\\GraphQL\\Mutations\\Update"
+        )
+    deleteProduct(id: Int!): ResponseDelete!
+        @field(
+            resolver: "App\\Modules\\Product\\GraphQL\\Mutations\\Delete"
+        )
+}

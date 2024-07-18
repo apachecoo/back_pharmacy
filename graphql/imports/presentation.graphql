@@ -1,0 +1,38 @@
+type Presentation {
+    id: ID!
+    name: String
+    shortName: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input PresentationInput
+    @validator(
+        class: "App\\Modules\\Presentation\\GraphQL\\Validators\\InputValidator"
+    ) {
+    name: String
+    shortName: String
+}
+
+extend type Query {
+    Presentation(id: ID! @eq): Presentation! @find
+    presentations(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        name: String @where(operator: "like")
+    ): [Presentation!]! @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createPresentation(input: PresentationInput! @spread): Presentation!
+        @field(
+            resolver: "App\\Modules\\Presentation\\GraphQL\\Mutations\\Create"
+        )
+    updatePresentation(id: Int!, input: PresentationInput!): Presentation!
+        @field(
+            resolver: "App\\Modules\\Presentation\\GraphQL\\Mutations\\Update"
+        )
+    deletePresentation(id: Int!): ResponseDelete!
+        @field(
+            resolver: "App\\Modules\\Presentation\\GraphQL\\Mutations\\Delete"
+        )
+}
