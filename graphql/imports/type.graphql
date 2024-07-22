@@ -1,6 +1,9 @@
 type Type {
     id: ID!
     type: String
+    edit: Boolean @edit
+    delete: Boolean @delete
+    download: Boolean @download
     created_at: DateTime
     updated_at: DateTime
 }
