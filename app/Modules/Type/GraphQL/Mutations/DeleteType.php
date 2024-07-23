@@ -17,10 +17,10 @@ final readonly class DeleteType
     {
         $id = (int) $args['id'] ?? null;
         if (!$this->typeBL->getById($id)) {
-            return $this->responseDelete(__('type.deletedType'), false);
+            return $this->responseDelete(__('type.notFoundType'), false);
         }
         if ($this->typeBL->delete($id)) {
-            return $this->responseDelete(__('type.notFoundType'), true);
+            return $this->responseDelete(__('type.deletedType'), true);
         }
         return $this->responseDelete('', false);
     }
