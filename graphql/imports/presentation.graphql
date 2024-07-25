@@ -2,6 +2,9 @@ type Presentation {
     id: ID!
     name: String
     shortName: String
+    edit: Boolean @edit
+    delete: Boolean @delete
+    download: Boolean @download
     created_at: DateTime
     updated_at: DateTime
 }
@@ -19,6 +22,8 @@ extend type Query {
     presentations(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         name: String @where(operator: "like")
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "id", order: ASC }])
     ): [Presentation!]! @paginate(defaultCount: 10)
 }
 

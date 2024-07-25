@@ -20,21 +20,16 @@ extend type Query {
     types(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         type: String @where(operator: "like")
-        orderBy: [OrderByClause!] @orderBy(default: [{ column: "id", order: ASC }])
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "id", order: ASC }])
     ): [Type!]! @paginate(defaultCount: 10)
 }
 
 extend type Mutation {
     createType(input: TypeInput! @spread): Type!
-        @field(
-            resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\CreateType"
-        )
+        @field(resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\CreateType")
     updateType(id: Int!, input: TypeInput!): Type!
-        @field(
-            resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\UpdateType"
-        )
+        @field(resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\UpdateType")
     deleteType(id: Int!): ResponseDelete!
-        @field(
-            resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\DeleteType"
-        )
+        @field(resolver: "App\\Modules\\Type\\GraphQL\\Mutations\\DeleteType")
 }

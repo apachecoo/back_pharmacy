@@ -2,6 +2,9 @@ type Laboratory {
     id: ID!
     name: String
     address: String
+    edit: Boolean @edit
+    delete: Boolean @delete
+    download: Boolean @download
     created_at: DateTime
     updated_at: DateTime
 }
@@ -19,8 +22,8 @@ extend type Query {
     laboratories(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         name: String @where(operator: "like")
-        "Filters by document"
-        document: Int @where(operator: "=")
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "id", order: ASC }])
     ): [Laboratory!]! @paginate(defaultCount: 10)
 }
 

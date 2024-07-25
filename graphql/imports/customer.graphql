@@ -8,7 +8,12 @@ type Customer {
 input CreateCustomerInput {
     name: String!
     phone: String!
-    address: String    
+    address: String  
+    edit: Boolean @edit
+    delete: Boolean @delete
+    download: Boolean @download
+    created_at: DateTime
+    updated_at: DateTime  
 }
 
 input UpdateCustomerInput {
@@ -24,6 +29,8 @@ extend type Query {
         name: String @where(operator: "like")
         "Filters by document"
         document: Int @where(operator: "=")
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "id", order: ASC }])
     ): [Customer!]! @paginate(defaultCount: 10)
 }
 
