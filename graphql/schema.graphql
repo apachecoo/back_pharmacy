@@ -50,5 +50,14 @@ type ResponseDelete {
     deleted: Boolean
 }
 
+input OrderByClause {
+    column: String!
+    order: SortOrder!
+}
+
+enum SortOrder {
+    ASC
+    DESC
+}
 
 #import */*.graphql
