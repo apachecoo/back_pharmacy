@@ -2,40 +2,42 @@ type Customer {
     id: ID!
     name: String
     phone: String
-    address: String    
-}
-
-input CreateCustomerInput {
-    name: String!
-    phone: String!
-    address: String  
+    address: String
     edit: Boolean @edit
     delete: Boolean @delete
     download: Boolean @download
     created_at: DateTime
-    updated_at: DateTime  
+    updated_at: DateTime
 }
 
-input UpdateCustomerInput {
+input CustomerInput {
     name: String!
     phone: String!
-    address: String    
+    address: String
 }
 
 extend type Query {
-    Customer(id:ID! @eq): Customer! @find
+    Customer(id: ID! @eq): Customer! @find
     customers(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         name: String @where(operator: "like")
         "Filters by document"
-        document: Int @where(operator: "=")
         orderBy: [OrderByClause!]
             @orderBy(default: [{ column: "id", order: ASC }])
     ): [Customer!]! @paginate(defaultCount: 10)
 }
 
 extend type Mutation {
-    createCustomer(input: CreateCustomerInput! @spread): Customer!  @field(resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\CreateCustomer")
-    updateCustomer(id: ID! input: UpdateCustomerInput! ): Customer! @field(resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\UpdateCustomer")
-    deleteCustomer(id: ID!): Customer! @field(resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\DeleteCustomer")
+    createCustomer(input: CustomerInput! @spread): Customer!
+        @field(
+            resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\CreateCustomer"
+        )
+    updateCustomer(id: Int!, input: CustomerInput!): Customer!
+        @field(
+            resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\UpdateCustomer"
+        )
+    deleteCustomer(id: ID!): Customer!
+        @field(
+            resolver: "App\\Modules\\Customer\\GraphQL\\Mutations\\DeleteCustomer"
+        )
 }

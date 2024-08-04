@@ -11,6 +11,9 @@ type Product {
     price: String
     stock: Int
     expiration: String
+    edit: Boolean @edit
+    delete: Boolean @delete
+    download: Boolean @download
     created_at: DateTime
     updated_at: DateTime
 }
@@ -34,6 +37,8 @@ extend type Query {
     products(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         description: String @where(operator: "like")
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "created_at", order: ASC }])
     ): [Product!]! @paginate(defaultCount: 10)
 }
 
