@@ -1,5 +1,5 @@
 type Product {
-    productCode: String
+    id: ID
     laboratoryId: Int
     laboratorie: Laboratory @belongsTo
     presentationId: Int
@@ -7,7 +7,7 @@ type Product {
     typeId: Int
     type: Type @belongsTo
     code: String
-    description: String
+    product: String
     price: String
     stock: Int
     expiration: String

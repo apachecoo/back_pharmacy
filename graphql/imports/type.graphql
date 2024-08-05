@@ -23,6 +23,12 @@ extend type Query {
         orderBy: [OrderByClause!]
             @orderBy(default: [{ column: "id", order: ASC }])
     ): [Type!]! @paginate(defaultCount: 10)
+    typesSelect(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        type: String @where(operator: "like")
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "id", order: ASC }])
+    ): [Type!]! @all
 }
 
 extend type Mutation {

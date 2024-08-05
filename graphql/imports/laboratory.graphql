@@ -25,6 +25,12 @@ extend type Query {
         orderBy: [OrderByClause!]
             @orderBy(default: [{ column: "id", order: ASC }])
     ): [Laboratory!]! @paginate(defaultCount: 10)
+    laboratoriesSelect(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        name: String @where(operator: "like")
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "name", order: ASC }])
+    ): [Laboratory!]! @all
 }
 
 extend type Mutation {
