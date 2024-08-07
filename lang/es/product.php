@@ -2,8 +2,9 @@
 
 return [
     "code"=> "Código",
-    "description"=> "Descripción",
+    "product"=> "Producto",
     "stock"=> "Stock",
     "expiration"=> "Fecha vencimiento",
-    "notFoundType"=> "No existe producto",
+    "notFoundProduct"=> "No existe producto",
+    "deletedProduct"=> "Producto eliminado",    
 ];

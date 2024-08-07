@@ -13,15 +13,15 @@ final readonly class Delete
     {
         $this->ProductBL = new ProductBL();
     }
-    
+
     function __invoke($rootValue, array $args): mixed
     {
         $id = (int) $args['id'] ?? null;
         if (!$this->ProductBL->getById($id)) {
-            return $this->responseDelete(__('product.deletedProduct'), false);
+            return $this->responseDelete(__('product.notFoundProduct'), false);
         }
         if ($this->ProductBL->delete($id)) {
-            return $this->responseDelete(__('product.notFoundProduct'), true);
+            return $this->responseDelete(__('product.deletedProduct'), true);
         }
         return $this->responseDelete('', false);
     }

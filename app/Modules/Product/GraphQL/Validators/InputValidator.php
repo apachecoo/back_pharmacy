@@ -18,7 +18,7 @@ final class InputValidator extends Validator
             'presentationId' => ['required', 'integer'],
             'typeId' => ['required', 'integer'],
             'code' => ['required', 'string', 'max:20'],
-            'description' => ['required', 'string', 'max:200'],
+            'product' => ['required', 'string', 'max:200'],
             'stock' => ['required', 'integer'],
             'expiration' => ['required', 'string'],
         ];
@@ -33,7 +33,7 @@ final class InputValidator extends Validator
     {
         return [
             'code' => __('product.code'),
-            'description' => __('product.description'),
+            'product' => __('product.product'),
             'stock' => __('product.stock'),
             'expiration' => __('product.expiration'),
         ];

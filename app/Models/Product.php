@@ -15,7 +15,7 @@ class Product extends Model
         'presentationId',
         'typeId',
         'code',
-        'description',
+        'product',
         'price',
         'stock',        
         'expiration',
