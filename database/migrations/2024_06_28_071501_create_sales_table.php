@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('customerId')->constrained('customers')->onDelete('cascade');
             $table->decimal('total', 10, 2);
             $table->foreignId('userId')->constrained('users')->onDelete('cascade');
-            $table->timestamp('date')->useCurrent();
             $table->timestamps();
         });
     }

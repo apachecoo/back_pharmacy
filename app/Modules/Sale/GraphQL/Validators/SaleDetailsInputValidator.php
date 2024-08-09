@@ -4,7 +4,7 @@ namespace App\Modules\Sale\GraphQL\Validators;
 
 use Nuwave\Lighthouse\Validation\Validator;
 
-final class InputValidator extends Validator
+final class SaleDetailsInputValidator extends Validator
 {
     /**
      * Return the validation rules.
@@ -14,8 +14,12 @@ final class InputValidator extends Validator
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'shortName' => ['required', 'string', 'max:10'],
+            'productId' => ['required'],
+            'saleId' => ['required'],
+            'quantity' => ['required'],
+            'discount' => ['required'],
+            'price' => ['required'],
+            'total' => ['required'],
         ];
     }
 
@@ -27,8 +31,7 @@ final class InputValidator extends Validator
     public function attributes(): array
     {
         return [
-            'name' => __('sale.name'),
-            'shortName' => __('sale.shortName'),
+            'total' => __('sale.total'),
         ];
     }
 

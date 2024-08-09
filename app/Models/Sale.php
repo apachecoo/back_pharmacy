@@ -14,7 +14,6 @@ class Sale extends Model
         'customerId',
         'total',
         'userId',
-        'date',
         'created_at',
         'updated_at',
     ];

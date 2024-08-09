@@ -36,7 +36,7 @@ extend type Query {
     Product(id: ID! @eq): Product! @find
     products(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
-        description: String @where(operator: "like")
+        product: String @where(operator: "like")
         orderBy: [OrderByClause!]
             @orderBy(default: [{ column: "created_at", order: ASC }])
     ): [Product!]! @paginate(defaultCount: 10)

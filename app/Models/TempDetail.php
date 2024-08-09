@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TempDetail extends Model
 {
     use HasFactory;
+
+    public $table="tempDetails";
     protected $fillable = [
         'id',
         'userId',

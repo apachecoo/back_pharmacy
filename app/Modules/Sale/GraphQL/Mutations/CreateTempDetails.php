@@ -2,16 +2,16 @@
 
 namespace App\Modules\Sale\GraphQL\Mutations;
 
-use App\Modules\Sale\BL\SaleBL;
+use App\Models\TempDetail;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-final readonly class Create
+final readonly class CreateTempDetails
 {
     public function __invoke(
         $rootValue,
         array $args,
         GraphQLContext $context
     ) {
-        return (new SaleBL())->create($args);
+        return TempDetail::create($args);
     }
 }

@@ -1,0 +1,86 @@
+type TempDetails {
+    id: ID!
+    userId: Int!
+    productId: Int!
+    quantity: Int!
+    discount: String
+    unitPrice: String
+    total: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+type Sale {
+    id: ID!
+    customerId: Int!
+    userId: Int!
+    total: String
+    date: Date
+    download: Boolean @download
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+type SaleDetails {
+    id: ID!
+    productId: Int!
+    saleId: Int!
+    quantity: Int!
+    discount: String!
+    price: String!
+    total: String!
+}
+
+input SaleInput
+    @validator(
+        class: "App\\Modules\\Sale\\GraphQL\\Validators\\SaleInputValidator"
+    ) {
+    customerId: Int!
+    userId: Int!
+    total: String!
+}
+
+input SaleDetailsInput
+    @validator(
+        class: "App\\Modules\\Sale\\GraphQL\\Validators\\SaleDetailsInputValidator"
+    ) {
+    productId: Int!
+    saleId: Int!
+    quantity: Int!
+    discount: String!
+    price: String!
+    total: String!
+}
+
+input TempDetailsInput
+    @validator(
+        class: "App\\Modules\\Sale\\GraphQL\\Validators\\TempDetailsInputValidator"
+    ) {
+    userId: Int!
+    productId: Int!
+    quantity: Int!
+    discount: String
+    unitPrice: String
+    total: String
+}
+
+extend type Query {
+    sale(id: ID! @eq): Sale! @find
+    sales(
+        orderBy: [OrderByClause!]
+            @orderBy(default: [{ column: "created_at", order: ASC }])
+    ): [Sale!]! @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createTempDetails(input: TempDetailsInput! @spread): TempDetails!
+        @field(
+            resolver: "App\\Modules\\Sale\\GraphQL\\Mutations\\CreateTempDetails"
+        )
+    createSale(input: SaleInput! @spread): Sale!
+        @field(resolver: "App\\Modules\\Sale\\GraphQL\\Mutations\\CreateSale")
+    createSaleDetails(input: SaleDetailsInput! @spread): SaleDetails!
+        @field(
+            resolver: "App\\Modules\\Sale\\GraphQL\\Mutations\\CreateSaleDetails"
+        )
+}
